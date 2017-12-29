@@ -64,12 +64,16 @@ public class RNOpenTokSessionManager implements Session.SessionListener, Session
     }
 
     public void disconnectSession(String sessionId) {
-        Session session = this.mSessions.get(sessionId);
+       try{
+        Session session = getSession(sessionId);
 
         if (session != null) {
             session.disconnect();
             this.mSessions.remove(sessionId);
         }
+       }catch(Exception err){
+     
+       }
     }
 
     public void disconnectAllSessions() {
